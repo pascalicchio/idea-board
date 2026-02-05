@@ -79,7 +79,11 @@ export default function Dashboard() {
     setNewTask('');
 
     // Mark agent as busy
-    setAgentStatus({ status: 'executing', currentTask: task.title });
+    setAgentStatus({ 
+      status: 'executing', 
+      currentTask: task.title,
+      lastActive: new Date().toISOString(),
+    });
 
     try {
       // Send to my execution engine
