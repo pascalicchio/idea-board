@@ -35,7 +35,7 @@ export default function Dashboard() {
   useEffect(() => {
     const token = document.cookie.split('; ').find(row => row.startsWith('mission_token='));
     if (!token) {
-      router.push('/login');
+      router.push('/mission-control/login');
     } else {
       setAuthenticated(true);
       loadTasks();
