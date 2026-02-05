@@ -1,113 +1,97 @@
-# 🗂️ Project & Ideas Board
+# 🗂️ Project & Ideas Board + Mission Control
 
-A **real-time Kanban board** for organizing ideas and tasks across all your projects with Supabase backend.
+Two powerful tools for organizing and executing:
 
-## Features
+## 🗮️ Part 1: Project & Ideas Board
 
-### 🎯 Kanban Board
+A **real-time Kanban board** for organizing ideas and tasks across all your projects.
+
+### Features
 - **4 Columns:** Ideas → To Do → In Progress → Done
-- **Move cards** with → (advance) and ← (go back) buttons
-- **Drag-and-drop** style workflow
+- **5 Projects:** TrendWatcher, HackerStack, Autonomous Agent, Calm Under Pressure, General
+- **Real-time Updates** via Supabase
+- **Voting System** for prioritization
+- **Auto-Process** (⚡ button) for task execution
 
-### 🗂️ Project Management
-- **5 Projects tracked:**
-  - 📈 TrendWatcher - E-commerce intelligence SaaS
-  - 🛠️ HackerStack - AI tools directory
-  - 🤖 Autonomous Agent - Mr. Anderson's journey
-  - 👕 Calm Under Pressure - E-commerce apparel
-  - 📝 General - Miscellaneous
+---
 
-### ⬆️ Voting System
-- Upvote the best ideas
-- Sort by vote count
+## 🎯 Part 2: Mission Control
 
-### 🔴 Real-Time Updates
-- Supabase subscription for instant updates
-- See changes from other devices in real-time
+**Mr. Anderson's Private AI Agent Dashboard** - A direct line to autonomous execution!
 
-### 🎨 UI Features
-- Color-coded project tags
-- Priority indicators (🔴🟡🟢)
-- Dark mode design
-- Responsive layout
+### Features
+- 🔐 **Password Protected** - Only you can access
+- 🤖 **Mr. Anderson Avatar** with real-time status:
+  - 💤 **Idle** (purple gradient, floating animation)
+  - ⚡ **Executing** (blue→green gradient, pulsing)
+  - 🔴 **Down** (red gradient, static)
+- ⚡ **Instant Execution** - Tasks run when submitted
+- 📊 **Task History** - Results and timestamps
+- 🎯 **Smart Keywords:**
+  - `research X` → Research analysis
+  - `post to X` → Draft social post
+  - `blog X` → Write content
+  - `build X` → Generate code
+  - `fix X` → Debug issues
+  - `deploy X` → Deploy to production
+  - `schedule X` → Create cron job
+  - `integrate X` → Connect APIs
+  - `analyze X` → Run analysis
+- ❤️️ **Heartbeat Endpoint** (`/api/heartbeat`) - Check if Mr. Anderson is online
 
-## Tech Stack
+### Access
+```
+https://your-domain/mission-control/dashboard
+```
 
-- **Frontend:** Next.js 14, React, TypeScript
-- **Backend:** Supabase (PostgreSQL + Real-time)
-- **Styling:** CSS Variables, Purple Gradient Theme
-- **Deployment:** Vercel
-
-## Quick Start
-
+### Setup
 ```bash
-cd /root/.openclaw/idea-board
-
-# Install dependencies
+cd mission-control
 npm install
-
-# Copy environment variables
 cp .env.example .env.local
-# Edit .env.local with your Supabase credentials
-
-# Run development server
+# Set MISSION_PASSWORD in .env.local
 npm run dev
 ```
 
-Open http://localhost:3000/board
+---
 
-## Database Setup
+## Quick Start
 
-1. Create a project at [Supabase](https://supabase.com)
-2. Go to SQL Editor and run `schema.sql`
-3. Copy your project URL and anon key to `.env.local`
-
-## Deployment to Vercel
-
-### Option 1: Vercel CLI
+### Project Board
 ```bash
-cd /root/.openclaw/idea-board
-vercel login
-vercel deploy --prod
+cd idea-board
+npm install
+cp .env.example .env.local  # Add Supabase credentials
+npm run dev
+# Open http://localhost:3000/board
 ```
 
-### Option 2: Git Integration
+### Mission Control
+```bash
+cd mission-control
+npm install
+cp .env.example .env.local
+# Set MISSION_PASSWORD
+npm run dev
+# Open http://localhost:3000/mission-control/dashboard
+```
+
+---
+
+## Deployment
+
+Both apps are in the same repository:
+
+| App | URL | Setup |
+|-----|-----|-------|
+| Project Board | `/board` | Supabase required |
+| Mission Control | `/mission-control/dashboard` | Password only |
+
+### Vercel Deployment
 1. Push to GitHub
-2. Import in Vercel dashboard
-3. Add environment variables
-4. Deploy
-
-### Environment Variables in Vercel
-Add these in Settings > Environment Variables:
-- `NEXT_PUBLIC_SUPABASE_URL` - Your Supabase project URL
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Your Supabase anon key
-
-## API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/cards` | Fetch all projects and cards |
-| POST | `/api/cards` | Create a new card |
-| PUT | `/api/cards` | Update a card |
-| DELETE | `/api/cards?id=` | Delete a card |
-| GET | `/api/votes?card_id=` | Get vote count |
-| POST | `/api/votes` | Vote or add comment |
-
-## Seeded Tasks
-
-| Task | Project | Status |
-|------|---------|--------|
-| Add Amazon Movers API | TrendWatcher | 🔥 In Progress |
-| Create 20 blog posts | HackerStack | 📋 To Do |
-| Reach 1000 followers | Autonomous | 📋 To Do |
-| Set up Stripe payments | TrendWatcher | 💡 Idea |
-| Design product mockups | Calm | 💡 Idea |
-| Fix subscription bug | TrendWatcher | ✅ Done |
-| Schedule 35 posts/week | Autonomous | ✅ Done |
-
-## Real-Time Demo
-
-When Supabase is configured, you'll see a "🔴 Real-time connected" indicator and changes will sync instantly across all devices.
+2. Import in Vercel
+3. For Project Board: Add Supabase env vars
+4. For Mission Control: Add `MISSION_PASSWORD` env var
 
 ---
 
