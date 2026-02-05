@@ -352,7 +352,7 @@ const lastActiveStyle: React.CSSProperties = {
   color: 'var(--text-tertiary)',
   fontSize: '12px',
   margin: 0,
-});
+};
 
 const inputFormStyle: React.CSSProperties = {
   display: 'flex',
