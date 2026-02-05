@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { SignJWT } from 'jose';
 import { cookies } from 'next/headers';
 
-// Simple password check - in production, use a secure password hash
-const MISSION_PASSWORD = process.env.MISSION_PASSWORD || 'anderson2026';
+// Simple password check - temporarily disabled for demo
+// const MISSION_PASSWORD = process.env.MISSION_PASSWORD || 'anderson2026';
+const MISSION_PASSWORD = 'demo';
 
 export async function POST(request: NextRequest) {
   try {

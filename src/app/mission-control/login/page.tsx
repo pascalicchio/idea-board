@@ -52,7 +52,7 @@ export default function LoginPage() {
         <form onSubmit={handleLogin} style={formStyle}>
           <input
             type="password"
-            placeholder="Enter access code"
+            placeholder="Enter access code (demo: demo)"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             style={inputStyle}
