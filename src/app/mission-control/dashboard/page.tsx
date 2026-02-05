@@ -12,7 +12,7 @@ interface Task {
 }
 
 interface AgentStatus {
-  status: 'idle' | 'executing';
+  status: 'idle' | 'executing' | 'down';
   currentTask?: string;
   lastActive: string;
 }
@@ -25,7 +25,7 @@ export default function Dashboard() {
   // Agent Status States
   const [agentStatus, setAgentStatus] = useState<AgentStatus>({
     status: 'idle', // 'idle' | 'executing' | 'down'
-    currentTask?: string,
+    currentTask: undefined,
     lastActive: new Date().toISOString(),
   });
   const router = useRouter();
