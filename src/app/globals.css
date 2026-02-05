@@ -1,0 +1,45 @@
+:root {
+  --gradient-1: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+  
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #121212;
+  --bg-card: #18181b;
+  --bg-hover: #27272a;
+  
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
+  
+  --border-subtle: #27272a;
+  --accent-purple: #8B5CF6;
+  --accent-pink: #EC4899;
+  --accent-blue: #00C9FF;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
