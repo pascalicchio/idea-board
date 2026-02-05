@@ -8,6 +8,10 @@ export async function POST(request: NextRequest) {
     const { card_id, action } = body;
     
     if (action === 'process' && card_id) {
+      if (!supabase) {
+        return NextResponse.json({ error: 'Supabase not configured' }, { status: 500 });
+      }
+      
       // Get the card with project info
       const { data: cards, error: cardError } = await supabase
         .from('cards')
