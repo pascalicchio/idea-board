@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/db';
-import { processNewCard } from '@/lib/task-processor';
+import { executeActions } from '@/lib/task-executor';
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,30 +13,46 @@ export async function POST(request: NextRequest) {
       }
       
       // Get the card with project info
-      const { data: cards, error: cardError } = await supabase
+      const { data: card, error: cardError } = await supabase
         .from('cards')
         .select(`*, project:projects(*)`)
         .eq('id', card_id)
         .single();
       
-      if (cardError || !cards) {
+      if (cardError || !card) {
         return NextResponse.json({ error: 'Card not found' }, { status: 404 });
       }
       
-      // Process the card
-      const { actions } = await processNewCard(cards, cards.project);
+      // Execute the actions!
+      const { success, executed, errors } = await executeActions(card, card.project);
       
-      // Update card status to "in-progress"
-      await supabase
-        .from('cards')
-        .update({ status: 'in-progress' })
-        .eq('id', card_id);
+      // Update card status to "in-progress" if it was "idea"
+      if (card.status === 'idea') {
+        await supabase
+          .from('cards')
+          .update({ status: 'in-progress' })
+          .eq('id', card_id);
+      }
+      
+      // Generate response message
+      let message = '';
+      if (executed.length > 0) {
+        message = `✅ Successfully executed ${executed.length} action(s):\n\n${executed.join('\n')}`;
+      } else {
+        message = '📝 Task noted. No automatic actions available for this type.';
+      }
+      
+      if (errors.length > 0) {
+        message += `\n\n⚠️ Warnings:\n${errors.join('\n')}`;
+      }
       
       return NextResponse.json({ 
-        success: true, 
-        card: cards,
-        actions,
-        message: `Found ${actions.length} automated actions for this task`
+        success,
+        card,
+        executed,
+        errors,
+        message,
+        tip: 'Tip: Add keywords like "post", "deploy", "blog", "fix", "research" to trigger automatic actions!'
       });
     }
     
