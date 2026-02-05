@@ -135,6 +135,28 @@ export default function IdeaBoard() {
     fetchData();
   };
 
+  const processCard = async (id: string) => {
+    try {
+      const res = await fetch('/api/process', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ card_id: id, action: 'process' })
+      });
+      
+      const data = await res.json();
+      
+      if (data.success) {
+        alert(`⚡ Auto-Processing!\n\n${data.actions.join('\n')}`);
+        fetchData();
+      } else {
+        alert('Processing failed: ' + (data.error || 'Unknown error'));
+      }
+    } catch (error) {
+      console.error('Process error:', error);
+      alert('Error processing card');
+    }
+  };
+
   const filteredCards = filter === 'all' 
     ? cards 
     : cards.filter(c => c.project_id === filter);
@@ -319,9 +341,29 @@ export default function IdeaBoard() {
                           <button onClick={() => moveCard(card.id, 'left')} style={actionBtnStyle}>←</button>
                         )}
                         {status.key !== 'done' && (
-                          <button onClick={() => moveCard(card.id, 'right')} style={actionBtnStyle}>→</button>
+                          <button 
+                            onClick={() => moveCard(card.id, 'right')} 
+                            style={{ ...actionBtnStyle, background: 'var(--gradient-1)' }}
+                          >
+                            →
+                          </button>
                         )}
                       </div>
+                      <button 
+                        onClick={() => processCard(card.id)}
+                        style={{
+                          padding: '4px 10px',
+                          background: card.status === 'in-progress' ? 'var(--gradient-1)' : 'var(--bg-hover)',
+                          border: 'none',
+                          borderRadius: '4px',
+                          color: card.status === 'in-progress' ? 'white' : 'var(--text-secondary)',
+                          fontSize: '11px',
+                          cursor: 'pointer'
+                        }}
+                        title="Auto-process this task"
+                      >
+                        ⚡ {card.status === 'in-progress' ? 'Processing' : 'Auto'}
+                      </button>
                       <button onClick={() => deleteCard(card.id)} style={deleteBtnStyle}>🗑️</button>
                     </div>
                   </div>
