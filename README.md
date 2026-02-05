@@ -2,7 +2,7 @@
 
 Two powerful tools for organizing and executing:
 
-## 🗮️ Part 1: Project & Ideas Board
+## 🗮️ Part 1: Project & Ideas Board (`/board`)
 
 A **real-time Kanban board** for organizing ideas and tasks across all your projects.
 
@@ -15,12 +15,12 @@ A **real-time Kanban board** for organizing ideas and tasks across all your proj
 
 ---
 
-## 🎯 Part 2: Mission Control
+## 🎯 Part 2: Mission Control (`/mission-control/dashboard`)
 
 **Mr. Anderson's Private AI Agent Dashboard** - A direct line to autonomous execution!
 
 ### Features
-- 🔐 **Password Protected** - Only you can access
+- 🔐 **Password Protected** - Only Fillipe can access
 - 🤖 **Mr. Anderson Avatar** with real-time status:
   - 💤 **Idle** (purple gradient, floating animation)
   - ⚡ **Executing** (blue→green gradient, pulsing)
@@ -37,20 +37,16 @@ A **real-time Kanban board** for organizing ideas and tasks across all your proj
   - `schedule X` → Create cron job
   - `integrate X` → Connect APIs
   - `analyze X` → Run analysis
-- ❤️️ **Heartbeat Endpoint** (`/api/heartbeat`) - Check if Mr. Anderson is online
+- ❤️️ **Heartbeat Endpoint** (`/mission-control/api/heartbeat`) - Check if Mr. Anderson is online
 
-### Access
+### Access URL
 ```
-https://your-domain/mission-control/dashboard
+https://idea-board-beige.vercel.app/mission-control/dashboard
 ```
 
-### Setup
-```bash
-cd mission-control
-npm install
-cp .env.example .env.local
-# Set MISSION_PASSWORD in .env.local
-npm run dev
+### Password
+```
+nb3.u3_!CnN6RLy6UpW
 ```
 
 ---
@@ -68,30 +64,29 @@ npm run dev
 
 ### Mission Control
 ```bash
-cd mission-control
+cd idea-board
 npm install
-cp .env.example .env.local
-# Set MISSION_PASSWORD
 npm run dev
 # Open http://localhost:3000/mission-control/dashboard
+# Password: nb3.u3_!CnN6RLy6UpW
 ```
 
 ---
 
 ## Deployment
 
-Both apps are in the same repository:
+Both apps deploy together automatically from GitHub:
 
-| App | URL | Setup |
-|-----|-----|-------|
-| Project Board | `/board` | Supabase required |
-| Mission Control | `/mission-control/dashboard` | Password only |
+| App | Route | Required Env Vars |
+|-----|-------|------------------|
+| Project Board | `/board` | Supabase URL + Key |
+| Mission Control | `/mission-control/dashboard` | `MISSION_PASSWORD` |
 
-### Vercel Deployment
-1. Push to GitHub
-2. Import in Vercel
-3. For Project Board: Add Supabase env vars
-4. For Mission Control: Add `MISSION_PASSWORD` env var
+### Vercel Environment Variables
+Add in Vercel Settings > Environment Variables:
+- `NEXT_PUBLIC_SUPABASE_URL` - Supabase project URL
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Supabase anon key
+- `MISSION_PASSWORD` - Access password for Mission Control
 
 ---
 
