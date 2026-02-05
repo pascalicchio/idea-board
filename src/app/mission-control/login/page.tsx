@@ -25,7 +25,7 @@ export default function LoginPage() {
 
       if (data.success) {
         document.cookie = `mission_token=${data.token}; path=/; max-age=86400`;
-        router.push('/dashboard');
+        router.push('/mission-control/dashboard');
       } else {
         setError(data.error || 'Invalid password');
       }
