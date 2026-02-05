@@ -50,7 +50,7 @@ export default function Dashboard() {
 
   const loadTasks = async () => {
     try {
-      const res = await fetch('/api/tasks');
+      const res = await fetch('/mission-control/api/tasks');
       const data = await res.json();
       setTasks(data.tasks || []);
     } catch {
